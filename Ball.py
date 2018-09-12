@@ -1,7 +1,7 @@
 import numpy as np
 import Particles as par
 import VelocityField as vel
-
+#Ball is fired to simulate a particle in the vector field
 class Ball(object):
     def __init__(self, field):  # field means the vector field object
         self.xPos = 0
@@ -20,7 +20,8 @@ class Ball(object):
         self.Zvel = None
         self.diffX = -1
         self.diffZ = -1
-
+    #Pass the run method a Radon object. All relevant information is given via the Radon particle
+    #The ball will simulate the Radon's movement assuming that the current vector field is held
     def run(self, Radon):
         self.xPos = Radon.position[0]
         self.zPos = Radon.position[2]
@@ -56,10 +57,10 @@ class Ball(object):
                 firstRun = False
             self.t = self.t + self.timestep
         return self.within(Radon.partner)
-
+    #used to set the position during iterations
     def setPos(self):
         self.position = [self.xPos, 0, self.zPos]
-
+    #Tests if the particles arre within the ball's radius
     def within(self, Particle):
         if (Particle.position[0] > self.xPos - self.radius and Particle.position[0] < self.xPos + self.radius):
             if (Particle.position[2] > self.zPos - self.radius and Particle.position[2] < self.zPos + self.radius):
@@ -72,13 +73,14 @@ class Ball(object):
     def add(self, Radon):
         if (self.within(Radon)):
             self.Radons.append(Radon)
-
+    #filters out the particles that are not in the vicinity of the ball
+    #Uses the within method
     def cleanse(self):
         if (len(self.Radons) != 0):
             for rn in self.Radons:
                 if (self.within(rn) == False):
                     self.Radons.remove(rn)
-
+    #Sets the velocity of the ball by averaging the paritcles velocities within its vicinity
     def setVelocity(self):
         Xvels = []
         Zvels = []
