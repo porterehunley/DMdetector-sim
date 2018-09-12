@@ -1,4 +1,9 @@
 import math as np
+#Polonium and Radon classes form the backbone of all the functions in the simulation
+#All classes run with Poloniums and Radons as their inputs
+#Only difference between the two classes are the types
+#If I could do this differently, i would have the classes inherit from a super
+#class of type 'Particle'
 class Polonium(object):
     def __init__(self, time, position):
         self.matched = False
