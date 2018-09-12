@@ -1,3 +1,5 @@
+#Bin acts as abar under a curve. It is used as a instrument to maximize the chi2 between the 
+#times of of the Radon/Pol matches. 
 class Bin(object): #Needs updating
     def __init__(self, time1, time2):
         self.max = time2
@@ -11,7 +13,7 @@ class Bin(object): #Needs updating
         self.type = "Bin"
         self.adjRight = None
         self.adjLeft = None
-
+    #eat refers to putting a matched pair inside a bin if they meet the time criterial
     def eat(self, Polonium, ):
         if Polonium.matched == True:
             if (self.max > (Polonium.time - Polonium.partner.time) >= self.min):
@@ -21,7 +23,7 @@ class Bin(object): #Needs updating
                 self.chi2 = Least_Squares_One_Bin(self.fx, self.height)
                 Polonium.bin = self
                 Polonium.partner.bin = self
-
+    #vomit is removing a matched pair from the "belly" of the bin
     def vomit(self, Particle):
         if (Particle.type == "Po"):
             self.bellyPo.remove(Particle)
@@ -31,6 +33,6 @@ class Bin(object): #Needs updating
         elif (Particle.type == "Rn"):
             self.bellyRn.remove(Particle)
             Particle.bin = None
-
+    #calculates the chi2 of this specific bin from the decay curve
     def chi2Test(self, integer):
         return Least_Squares_One_Bin(self.fx, self.height + integer)
