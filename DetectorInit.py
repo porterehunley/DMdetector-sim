@@ -4,6 +4,8 @@ import Particles
 import matplotlib as mpl
 import _pickle as pickle
 import matplotlib.pyplot as plt
+#This is used as a visualization tool.
+#Plors the vectors gneerated by the ball and the circular detector
 def plotVectors2D(Arr, xmin, xmax, zmin, zmax): #Takes the array and the dimensions of the space and plots them
     X, Y, U, V = zip(*Arr)
     plt.figure(figsize=(10,10), dpi=80)
