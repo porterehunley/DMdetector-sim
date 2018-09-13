@@ -2,6 +2,9 @@ import numpy as np
 import Ball as bll
 import Square as sq
 import matplotlib.pyplot as plt
+
+#This is the class that holds the vector field
+#The vector field uses the ball method here to reconstruct
 def plotVectors2D(Arr, xmin, xmax, zmin, zmax): #Takes the array and the dimensions of the space and plots them
     X, Y, U, V = zip(*Arr)
     plt.figure(figsize=(10,10), dpi=80)
