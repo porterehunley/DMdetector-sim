@@ -1,6 +1,7 @@
 import VelocityField as vel
 import _pickle as pickle
 import matplotlib.pyplot as plt
+#This is the main file that you run to generate the vector field and the reconstruction
 
 def plotVectors2D(Arr, xmin, xmax, zmin, zmax): #Takes the array and the dimensions of the space and plots them
     X, Y, U, V = zip(*Arr)
