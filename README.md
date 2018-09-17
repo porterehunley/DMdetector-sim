@@ -1,87 +1,33 @@
-# Project Title
+# Particle Simulation and Decay Matching
 
-One Paragraph of project description goes here
+The goal of this project is to accurately pair decaying radon atoms with their polonium offspring and reconstruct the resulting velocity. The code is modeled and written for the XENON1T darkmatter detector at Purdue University. The project is divided into three parts: simulation and reconstruction. 
+
+#### Simulation
+The simulation begins in the CircularDetector.py file. The code first simulates the decay of x number of Radons. The decayed radons are given a radon location and a velocity based on that location. In addition, they are also given a lifetime based on a previously derived probability function. It then runs the radon through the velocity field in small time increments until the counter reaches the lifetime given to the radon. At the end of its lifetime, the radon decays into a polonium and all relevant data is stored.
+
+
+#### Reconstruction
+
+Reconstruction starts in VelocityField.py and is run from VelReconstruction. The VelocityField class takes in a list of poloniums from the simulation that was run before. The velocity field first filters through the list of Poloniums and saves those who’s previous radon decay is close to the polonium in both time and position. These are so close together, that we can safely draw a straight vector between the two events; these poloniums are called constructors because they will be used to help build the rest of the velocity field. 
+
+Once all of the constructors are known, VelocityField uses Ball.py to try and match the pairs that are farther away based on the constructors’ velocities. The ball acts as a probe, it averages the velocities of the constructors around it, then, by small time increments, the ball travels across the detector and stops after a certain amount of time. We place the ball on the poloniums whose radon is too far away for the velocity vector to be drawn, and then send it on its way to see where it lands. If it lands on the radon, then we can add another velocity vector.
+
+After everything is run, the velocity field outputs the data to an array to visualize the new velocity field. 
+
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
+The repository is in the form of a PyCharm project. You can either download everything and load it into PyCharm as a new project, or you can just download the source code. 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+You must have Matplotlib and Numpy installed for it to run properly. 
 
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+First run DetectorInit.py, this will create all the data that will be used to reconstruct the velocity field. Then run VelReconstruction.py.
 
-### Break down into end to end tests
+First you will see an initial vecotor field, take note and close. After, you will see a "reconstructed" velocity field. 
 
-Explain what these tests test and why
 
-```
-Give an example
-```
 
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
