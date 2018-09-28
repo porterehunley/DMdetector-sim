@@ -3,7 +3,7 @@
 The goal of this project is to accurately pair decaying radon atoms with their polonium offspring and reconstruct the resulting velocity. The code is modeled and written for the XENON1T darkmatter detector at Purdue University. The project is divided into three parts: simulation and reconstruction. 
 
 #### Simulation
-The simulation begins in the CircularDetector.py file. The code first simulates the decay of x number of Radons. The decayed radons are given a radon location and a velocity based on that location. In addition, they are also given a lifetime based on a previously derived probability function. It then runs the radon through the velocity field in small time increments until the counter reaches the lifetime given to the radon. At the end of its lifetime, the radon decays into a polonium and all relevant data is stored.
+The simulation begins in the CircularDetector.py file. The code first simulates the decay of x number of Radons. The decayed radons are given a random location and a velocity based on that location. In addition, they are also given a lifetime based on a previously derived probability function. It then runs the radon through the velocity field in small time increments until the counter reaches the lifetime given to the radon. At the end of its lifetime, the radon decays into a polonium and all relevant data is stored.
 
 
 #### Reconstruction
